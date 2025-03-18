@@ -1,10 +1,15 @@
-import HelloWorld, { ByeWorld } from "./components/HelloWorld";
+import HelloPerson from "./components/HelloPerson";
 
 function App() {
+  let person = {
+    name: "John",
+    age: 23,
+    favColor: "blue"
+  };
+
   return (
     <div className="App">
-      <HelloWorld />
-      <ByeWorld />
+      <HelloPerson personInfo={person} />
     </div>
   );
 }
