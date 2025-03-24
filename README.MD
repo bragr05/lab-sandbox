@@ -14,5 +14,5 @@ Repository for experimentation and testing with various technologies. Here you w
 You can clone this repository with:
 
 ```bash
-git clone https://github.com/bragr05/LabSandbox.git
+git clone https://github.com/bragr05/lab-sandbox.git
 ```
