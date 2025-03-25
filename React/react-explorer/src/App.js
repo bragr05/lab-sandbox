@@ -1,17 +1,11 @@
-import HelloPerson from "./components/HelloPerson";
+import Count from "./components/Count";
 
 function App() {
-  let person = {
-    name: "John",
-    age: 23,
-    favColor: "blue"
-  };
-
-  return (
-    <div className="App">
-      <HelloPerson personInfo={person} />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Count></Count>
+        </div>
+    );
 }
 
 export default App;
