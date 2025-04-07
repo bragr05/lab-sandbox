@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sitio2  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sitio2
+  template:
+    metadata:
+      labels:
+        app: sitio2
+    spec:
+      containers:
+      - name: sitio2
+        image: mcr.microsoft.com/azuredocs/aks-helloworld:v1
+        ports:
+        - containerPort: 80
+        env:
+        - name: TITLE
+          value: "Bienvenidos al Sitio 2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sitio2 
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: sitio2

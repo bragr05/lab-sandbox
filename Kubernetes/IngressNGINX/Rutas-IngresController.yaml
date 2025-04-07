@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-sitio1-sitio2
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /Sitio1(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: sitio1
+            port:
+              number: 80
+      - path: /Sitio2(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: sitio2
+            port:
+              number: 80
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: sitio1
+            port:
+              number: 80

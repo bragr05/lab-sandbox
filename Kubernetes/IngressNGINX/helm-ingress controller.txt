@@ -1,0 +1,16 @@
+//Agrega el repositorio llamado ingress-nginx a nuestro ambiente local
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx 
+
+
+// Actualiza la lista de repositorios locales que tenemos
+helm repo update
+
+
+// Instalamos el ingress controller en nuestro AKS. 
+helm install ingress-nginx ingress-nginx/ingress-nginx
+
+
+//Confirmar que el servicio y deployment llamadado ingress controller fue creado (Servicio Tipo Load balancer)
+kubectl get services 
+
+kubectl get deployments 
