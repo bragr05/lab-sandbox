@@ -1,0 +1,45 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azuredisk-csi-lab
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_LRS 
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: azure-managed-disk-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: azuredisk-csi-lab
+  resources:
+    requests:
+      storage: 5Gi
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-persistent-lab
+spec:
+  containers:
+    - name: mycontainer-lab
+      image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
+      volumeMounts:
+        - mountPath: "/mnt/azure"
+          name: persistent-volume
+  volumes:
+    - name: persistent-volume
+      persistentVolumeClaim:
+        claimName: azure-managed-disk-pvc

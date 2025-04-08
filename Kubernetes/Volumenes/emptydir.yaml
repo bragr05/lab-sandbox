@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-lab-emptydir
+spec:
+  containers:
+  - image: k8s.gcr.io/test-webserver
+    name: contenedor-lab-emptydir
+    volumeMounts:
+    - mountPath: /volume
+      name: volume-lab-emptydir # Match with the volume name
+  volumes:
+  - name: volume-lab-emptydir
+    emptyDir: {}

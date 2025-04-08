@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-lab
+data:
+  Ambiente: desarrollo
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-configmap-lab
+spec:
+  containers:
+  - name: continer-lab
+    image: alpine
+    volumeMounts:
+    - name: config-volume
+      mountPath: /config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: configmap-lab
