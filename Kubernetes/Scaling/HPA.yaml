@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: simple-todo-app-hpa
+spec:
+  maxReplicas: 10 # maximo numero de replicas
+  minReplicas: 5  # minimo numero de replicas
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: simple-todo-app # nombre del deployment en el que aplica el HPA
+  targetCPUUtilizationPercentage: 50 # target CPU condicionado a la carga de trabajo (si supera el 50% se escalará)
+---
